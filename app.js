@@ -10,7 +10,7 @@ document.addEventListener('alpine:init', () => {
         rows: 10,
         optgroups: {},
         locales: Object.keys(faker.locales),
-        locale: 'en_US',
+        locale: 'en_GB',
         init() {
             this.optgroups = Object.keys(faker)
                 .filter(g => !['definitions', 'fake', 'unique'].includes(g))
