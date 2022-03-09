@@ -42,7 +42,7 @@
         <h2 class="text-xl font-medium text-gray-700 mt-10">Add your columns</h2>
 
         <template x-for="(column, i) in columns">
-            <div class="grid grid-cols-2 gap-x-8 w-full mt-4" x-init="console.log(column, i)" :key="i">
+            <div class="grid grid-cols-2 gap-x-8 w-full mt-4" :key="i">
                 <div class="flex-1">
                     <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
                     <input type="text" name="name" x-model="columns[i].name" class="mt-1 shadow-sm focus:ring-teal-500 focus:border-teal-500 block w-full sm:text-sm border-gray-300 rounded-md">
@@ -52,11 +52,11 @@
                     <label for="type" class="block text-sm font-medium text-gray-700">Type</label>
 
                     <div class="flex items-center space-x-4">
-                        <select name="type" x-model="columns[i].type" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-teal-500 focus:border-teal-500 sm:text-sm rounded-md">
+                        <select name="type" x-on:change="columns[i].group = $el.value.split('|')[0]; columns[i].type = $el.value.split('|')[1]" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-teal-500 focus:border-teal-500 sm:text-sm rounded-md">
                             <template x-for="group in Object.keys(optgroups)">
                                 <optgroup x-bind:label="group">
                                     <template x-for="opt in optgroups[group]">
-                                        <option x-bind:value="opt" x-text="opt"></option>
+                                        <option x-bind:value="`${group}|${opt}`" x-text="opt" x-bind:selected="group === columns[i].group && opt === columns[i].type"></option>
                                     </template>
                                 </optgroup>
                             </template>

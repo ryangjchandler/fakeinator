@@ -1,7 +1,5 @@
 import { faker } from 'https://cdn.skypack.dev/@faker-js/faker';
 
-console.log(faker)
-
 document.addEventListener('alpine:init', () => {
     Alpine.data('fakeinator', () => ({
         name: '',
